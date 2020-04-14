@@ -28,6 +28,7 @@
     box-sizing: border-box;
     padding: 0 104px;
     justify-content: center;
+    background-color: transparent;
 }
 
 .logo {
@@ -39,9 +40,10 @@
 .list {
     display: grid;
     grid-auto-flow: column;
-    grid-column-gap: 30px;
+    grid-column-gap: 22px;
 
     span {
+        font-size: 20px;
         font-family: 'Courgette', cursive;
     }
 }
