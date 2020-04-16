@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
 
 export interface DialogData {
-  // otp: any;
+  otp: any;
 }
 
 @Component({
@@ -17,7 +17,6 @@ export interface DialogData {
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
   otp: any;
 
   registerForm: FormGroup;
