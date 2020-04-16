@@ -7,7 +7,7 @@
     font-size: 14px;
     height: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .header-container {
@@ -18,9 +18,25 @@
     flex-direction: row;
     align-items: center;
     white-space: nowrap;
+
     span {
         font-size: 15px;
         font-family: 'Special Elite', cursive;
+    }
+
+    p {
+        margin-left: 679px;
+        background-color: transparent;
+        color: white;
+        margin-top: 0px;
+
+        mat-icon {
+            padding: 10px;
+        }
+    
+        :hover{
+            // color: #b40303; 
+        }
     }
 }
 
@@ -62,6 +78,21 @@
     box-sizing: border-box;
     padding: 0 104px;
     justify-content: center;
+}
+
+
+.footer {
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    padding: 0 104px;
+    justify-content: center;
+    min-height: unset;
+    height: 40px;
+    span {
+        font-size: 15px;
+        font-family: 'Special Elite', cursive;
+    }
 }
 
 @media screen and (max-width: 768px) {
