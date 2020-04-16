@@ -5,5 +5,5 @@
 
 <div mat-dialog-actions>
     <button mat-raised-button color="primary" [disabled]="count !== 0" (click)="onNoClick()">Resend OTP</button>
-    <button mat-raised-button color="primary" *ngIf="showProceedBut" cdkFocusInitial>Proceed</button>
+    <button mat-raised-button color="primary" *ngIf="showProceedBut" [mat-dialog-close]="otp" cdkFocusInitial>Proceed</button>
 </div>

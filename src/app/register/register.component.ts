@@ -53,12 +53,28 @@ export class RegisterComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(OtpDialogComponent, {
       width: '30%',
-      data: {name: this.otp}
+      data: {otp: this.otp}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(this.registerForm.value);
+      console.log(result);
       this.otp = result;
+
+      if (result) {
+        this.toastr.success("Thank you for registering with us!");
+                this.router.navigate(['/login']);
+        // this.authService.registerUser(params)
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((res) => {
+        //         if (!res.isSucceed) {
+        //             this.toastr.error(res.msg)
+        //             return;
+        //         }
+        //         this.toastr.success("Thank you for registering with us!");
+        //         this.router.navigate(['/auth/login']);
+        //     }, (error) => { console.log(error) });
+      }
     });
   }
 
