@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette|Lobster|Special+Elite&display=swap');
+
+.header-topbar {
+    min-height: unset;
+    background-color: black;
+    color: #ffffff;
+    font-size: 14px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-container {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 104px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+
+    span {
+        font-size: 15px;
+        font-family: 'Special Elite', cursive;
+    }
+
+    p {
+        margin-left: 679px;
+        background-color: transparent;
+        color: white;
+        margin-top: 0px;
+
+        mat-icon {
+            padding: 10px;
+        }
+    
+        :hover{
+            // color: #b40303; 
+        }
+    }
+}
+
+.menu-holder {
+    box-sizing: border-box;
+    padding: 0 104px;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.logo {
+    font-family: 'Lobster', cursive;
+    color: black;
+    font-size: 50px;
+}
+
+.list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 22px;
+
+    span {
+        font-size: 20px;
+        font-family: 'Courgette', cursive;
+    }
+}
+
+.icon {
+    mat-icon {
+        padding: 10px;
+    }
+
+    :hover{
+        color: #b40303; 
+    }
+}
+
+.container {
+    box-sizing: border-box;
+    padding: 0 104px;
+    justify-content: center;
+}
+
+
+.footer {
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    padding: 0 104px;
+    justify-content: center;
+    min-height: unset;
+    height: 40px;
+    span {
+        font-size: 15px;
+        font-family: 'Special Elite', cursive;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-container {
+        padding: 0 15px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+  }
