@@ -2,17 +2,17 @@
     <mat-toolbar-row class="header-container">
         <span>FREE SHIPPING ON ORDERS OVER ₹100</span>
          <p>
-            <mat-icon matTooltip="singin">person_pin</mat-icon>
-            <mat-icon matTooltip="signup">person_add</mat-icon>
+            <mat-icon matTooltip="singin" [routerLink]="'/login'">person_pin</mat-icon>
+            <mat-icon matTooltip="signup" [routerLink]="'/register'">person_add</mat-icon>
          </p> 
     </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-grid-list cols="3" rowHeight="4:1" class="menu-holder">
-    <mat-grid-tile class="logo">AFkart</mat-grid-tile>
+    <mat-grid-tile class="logo" [routerLink]="'/'">AFkart</mat-grid-tile>
     <mat-grid-tile class="menu">
         <div class="list">
-            <span>HOME</span>
+            <span [routerLink]="'/'">HOME</span>
             <span [matMenuTriggerFor]="shop">SHOP</span>
             <span [matMenuTriggerFor]="product">PRODUCTS</span>
             <span [matMenuTriggerFor]="page">PAGE</span>
