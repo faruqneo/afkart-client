@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
     const dialogRef = this.dialog.open(OtpDialogComponent, {
       width: '30%',
-      data: { "store": "afkart.com", "number": this.registerForm.value.phoneNo, "otp": "" }
+      data: this.otp
     });
 
     dialogRef.afterClosed().subscribe(result => {

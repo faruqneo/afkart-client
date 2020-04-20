@@ -20,7 +20,6 @@ export class OtpDialogComponent implements OnInit {
   countDown;
   count;
 
-  phoneNo: any;
   showProceedBut = false;
   show = true
   @ViewChild('ngOtpInput') ngOtpInput: any;
