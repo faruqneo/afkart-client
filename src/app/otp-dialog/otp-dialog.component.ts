@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, ViewChild, Input } from '@angular/core';
-import { DialogData } from '../register/register.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
 import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { OTPData } from './otp';
 
 @Component({
   selector: 'app-otp-dialog',
@@ -19,6 +19,7 @@ export class OtpDialogComponent implements OnInit {
   count;
 
   otp: any;
+  phoneNo: any;
   showProceedBut = false;
   show = true
   @ViewChild('ngOtpInput') ngOtpInput: any;
@@ -36,7 +37,7 @@ export class OtpDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<OtpDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: OTPData,
     private route: ActivatedRoute
   ) { }
 
@@ -61,17 +62,18 @@ export class OtpDialogComponent implements OnInit {
   // }
 
   onNoClick(): void {
+
     this.dialogRef.close();
   }
 
   myTimer() {
-    this.count = 5;
+    this.count = 60;
     this.countDown = timer(0, 1000)
       .subscribe(x => {
         this.count = this.count - 1;
       });
 
-    this.sub = interval(500)
+    this.sub = interval(6000)
       .subscribe(x => {
         // console.log(this.count);
         if (this.count === 0) {

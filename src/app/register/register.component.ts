@@ -6,10 +6,8 @@ import { confirmPasswordValidator, noWhitespaceValidator } from '../validators/v
 import { takeUntil } from 'rxjs/internal/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
+import { AuthService } from '../auth.service';
 
-export interface DialogData {
-  otp: any;
-}
 
 @Component({
   selector: 'app-register',
@@ -20,40 +18,46 @@ export class RegisterComponent implements OnInit {
   otp: any;
 
   registerForm: FormGroup;
-  @ViewChild('phone') phone : any;
+  @ViewChild('phoneNo') phoneNo: any;
 
 
   constructor(
     private formBuilder: FormBuilder,
-        private toastr: ToastrService,
-        private router: Router,
-        public dialog: MatDialog
+    private toastr: ToastrService,
+    private router: Router,
+    public dialog: MatDialog,
+    // public authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      first_name: ['', [Validators.required, noWhitespaceValidator, Validators.pattern('^[a-zA-Z ]*$')]],
-      last_name: ['', [Validators.required, noWhitespaceValidator, Validators.pattern('^[a-zA-Z ]*$')]],
-      phone: ['', [Validators.required]],
+      firstName: ['', [Validators.required, noWhitespaceValidator, Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ['', [Validators.required, noWhitespaceValidator, Validators.pattern('^[a-zA-Z ]*$')]],
+      phoneNo: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}')]],
       password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{9,}')]],
       terms: ['', Validators.required],
       cpassword: ['', [Validators.required, confirmPasswordValidator]]
-  });
+    });
 
-  // Update the validity of the 'passwordConfirm' field
-  // when the 'password' field changes
-  // this.registerForm.get('password').valueChanges
-  //     .pipe(takeUntil(this._unsubscribeAll))
-  //     .subscribe(() => {
-  //         this.registerForm.get('cpassword').updateValueAndValidity();
-  //     });
+    // Update the validity of the 'passwordConfirm' field
+    // when the 'password' field changes
+    // this.registerForm.get('password').valueChanges
+    //     .pipe(takeUntil(this._unsubscribeAll))
+    //     .subscribe(() => {
+    //         this.registerForm.get('cpassword').updateValueAndValidity();
+    //     });
   }
 
   openDialog(): void {
+
+    // console.log(this.registerForm.value);
+    this.otp = { "store": "afkart.com", "number": this.registerForm.value.phoneNo, "otp": "" }
+    // this.authService.OTPSend(this.otp).subscribe(data => console.log(data))
+
     const dialogRef = this.dialog.open(OtpDialogComponent, {
       width: '30%',
-      data: {otp: this.otp}
+      data: { otp: this.otp }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,7 +67,7 @@ export class RegisterComponent implements OnInit {
 
       if (result) {
         this.toastr.success("Thank you for registering with us!");
-                this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
         // this.authService.registerUser(params)
         //     .pipe(takeUntil(this._unsubscribeAll))
         //     .subscribe((res) => {
@@ -78,7 +82,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  
+
 
   register() {
 
@@ -88,22 +92,22 @@ export class RegisterComponent implements OnInit {
       // this.toastr.success("Thank you for registering with us!");
       // this.router.navigate(['/login']);
 
-        // let params = {
-        //     ...this.registerForm.value, 
-        //     phone : this.phone.phoneNumber,
-        //     country_code : this.phone.selectedCountry.dialCode
-        // }
-        // this.authService.registerUser(params)
-        //     .pipe(takeUntil(this._unsubscribeAll))
-        //     .subscribe((res) => {
-        //         if (!res.isSucceed) {
-        //             this.toastr.error(res.msg)
-        //             return;
-        //         }
-        //         this.toastr.success("Thank you for registering with us!");
-        //         this.router.navigate(['/auth/login']);
-        //     }, (error) => { console.log(error) });
+      // let params = {
+      //     ...this.registerForm.value, 
+      //     phoneNo : this.phoneNo.phoneNoNumber,
+      //     country_code : this.phoneNo.selectedCountry.dialCode
+      // }
+      // this.authService.registerUser(params)
+      //     .pipe(takeUntil(this._unsubscribeAll))
+      //     .subscribe((res) => {
+      //         if (!res.isSucceed) {
+      //             this.toastr.error(res.msg)
+      //             return;
+      //         }
+      //         this.toastr.success("Thank you for registering with us!");
+      //         this.router.navigate(['/auth/login']);
+      //     }, (error) => { console.log(error) });
     }
-}
+  }
 
 }
