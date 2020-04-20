@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     public dialog: MatDialog,
-    // public authService: AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -39,14 +39,6 @@ export class RegisterComponent implements OnInit {
       terms: ['', Validators.required],
       cpassword: ['', [Validators.required, confirmPasswordValidator]]
     });
-
-    // Update the validity of the 'passwordConfirm' field
-    // when the 'password' field changes
-    // this.registerForm.get('password').valueChanges
-    //     .pipe(takeUntil(this._unsubscribeAll))
-    //     .subscribe(() => {
-    //         this.registerForm.get('cpassword').updateValueAndValidity();
-    //     });
   }
 
   openDialog(): void {
@@ -57,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
     const dialogRef = this.dialog.open(OtpDialogComponent, {
       width: '30%',
-      data: { otp: this.otp }
+      data: { "store": "afkart.com", "number": this.registerForm.value.phoneNo, "otp": "" }
     });
 
     dialogRef.afterClosed().subscribe(result => {

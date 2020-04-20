@@ -5,6 +5,7 @@ import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { OTPData } from './otp';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-otp-dialog',
@@ -18,7 +19,6 @@ export class OtpDialogComponent implements OnInit {
   countDown;
   count;
 
-  otp: any;
   phoneNo: any;
   showProceedBut = false;
   show = true
@@ -38,15 +38,18 @@ export class OtpDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<OtpDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OTPData,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.myTimer()
+    // console.log(this.data)
+    this.data;
   }
 
   onOtpChange(otp) {
-    this.otp = otp;
+    this.data['otp'] = otp;
     this.showProceedBut = true;
     this.show = false;
   }
@@ -61,8 +64,13 @@ export class OtpDialogComponent implements OnInit {
   //   }, 0);
   // }
 
-  onNoClick(): void {
+  onReSend(): void {
+    this.authService.OTPSend(this.data).subscribe(data => console.log(data))
+    // this.dialogRef.close();
+  }
 
+  onProceed(): void {
+    this.authService.OTPVerify(this.data).subscribe(data => console.log(data))
     this.dialogRef.close();
   }
 

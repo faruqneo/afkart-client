@@ -14,6 +14,7 @@ import { OtpDialogComponent } from './otp-dialog/otp-dialog.component';
 import { MetarialModule } from './metarial.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MetarialModule
+    MetarialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
