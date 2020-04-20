@@ -1,0 +1,53 @@
+<mat-grid-list cols="2" rowHeight="2:2">
+    <mat-grid-tile>
+        <img src="//cdn.shopify.com/s/files/1/1388/1849/files/image-4_2048x.jpg?v=1559880309" alt="">
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <form name="loginForm" [formGroup]="loginForm" novalidate>
+            <span>LOGIN TO YOUR ACCOUNT</span>
+            <br>
+            <div class="example-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                        Email address is required
+                    </mat-error>
+                    <mat-error *ngIf="!loginForm.get('email').hasError('required') &&
+                                    loginForm.get('email').hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="example-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
+                fxLayoutAlign="space-between center">
+                <mat-checkbox class="remember-me" aria-label="Remember Me">
+                    Remember Me
+                </mat-checkbox>
+            </div>
+            <br>
+            <button mat-raised-button (click)="login()" class="submit-button" aria-label="LOGIN"
+                [disabled]="loginForm.invalid">
+                LOGIN
+            </button>
+            <br><br>
+            <a class="forgot-password" [routerLink]="'/auth/forgot-password'">
+                Forgot Password?
+            </a>
+            <br>
+            <span>Don't have an account?</span>&nbsp;
+            <a class="link" [routerLink]="['/register']">Create an account</a>
+        </form>
+    </mat-grid-tile>
+</mat-grid-list>

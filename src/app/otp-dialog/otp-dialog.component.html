@@ -1,0 +1,13 @@
+
+<p class="a-o-i">Enter OTP code sent to your mobile number {{data.number}}</p><br>
+<ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config">Enter verification code</ng-otp-input>
+<span *ngIf="data" class="o-t-p">OTP {{data.otp}}</span>
+<p *ngIf="show">time left {{count}} seconds</p>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [disabled]="count !== 0" (click)="onReSend()">Resend OTP</button>
+    <button mat-raised-button *ngIf="showProceedBut" (click)="onProceed()" cdkFocusInitial>Proceed</button>
+</div>
+
+<!-- [disabled]="count !== 0" -->
+<!-- [mat-dialog-close]="data" -->

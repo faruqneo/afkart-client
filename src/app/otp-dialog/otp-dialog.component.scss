@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette|Lobster|Special+Elite&display=swap');
+
+.a-o-i {
+    font-family: 'Courgette', cursive;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 0;
+  }
+  .a-o-i-t {
+    @extend .a-o-i;
+    font-size: 25px;
+    padding: 15px;
+    border-bottom: 1px solid lightgray;
+  }
+  
+    
+  .o-t-p {
+    display: block;
+    margin-top: 10px;
+    font-size: 15px;
+    font-family: 'Special Elite', cursive;
+  }
+  
+  
+  @media screen and (max-width: 767px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+    .content {
+      width: 100%;
+    }
+    .o-c {
+      display: block;
+    }
+    .list {
+      li {
+        padding-left: 2px;
+        width: calc(50% - 2px);
+        display: inline-block;
+      }
+    }
+  }
+  
+  .disabled {
+    pointer-events: none; //# use this if you want to block all pointer events on element
+    display: none; //# use this if you want to hide element
+  }
+  .notification-counter {
+    cursor: pointer;
+  }
+  
+
+  button {
+    background-color: black;
+    color: white;
+}
