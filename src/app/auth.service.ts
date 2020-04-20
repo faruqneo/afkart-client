@@ -7,7 +7,7 @@ import { Register } from './register/register';
 import { Login } from './login/login';
 import { OTPData } from './otp-dialog/otp';
 
-const baseUrl = environment.baseUrl;
+const { baseUrl, OTPUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +37,11 @@ export class AuthService {
   }
 
   OTPSend(otp: OTPData): Observable<OTPData> {
-    return this.http.post<OTPData>(`https://powerful-badlands-84912.herokuapp.com/api/otp`, otp);
+    return this.http.post<OTPData>(`${OTPUrl}/api/otp`, otp);
   }
 
   OTPVerify(otp: OTPData): Observable<OTPData> {
-    return this.http.post<OTPData>(`https://powerful-badlands-84912.herokuapp.com/api/otp/verify`, otp);
+    return this.http.post<OTPData>(`${OTPUrl}/api/otp/verify`, otp);
   }
 
 }
