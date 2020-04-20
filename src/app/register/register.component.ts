@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
     // console.log(this.registerForm.value);
     this.otp = { "store": "afkart.com", "number": this.registerForm.value.phoneNo, "otp": "" }
-    // this.authService.OTPSend(this.otp).subscribe(data => console.log(data))
+    this.authService.OTPSend(this.otp).subscribe(data => console.log(data))
 
     const dialogRef = this.dialog.open(OtpDialogComponent, {
       width: '30%',
@@ -53,11 +53,10 @@ export class RegisterComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(this.registerForm.value);
       console.log(result);
-      this.otp = result;
 
-      if (result) {
+      if (result.msg === "success") {
+        this.authService.createUser(this.registerForm.value);
         this.toastr.success("Thank you for registering with us!");
         this.router.navigate(['/login']);
         // this.authService.registerUser(params)
@@ -72,34 +71,6 @@ export class RegisterComponent implements OnInit {
         //     }, (error) => { console.log(error) });
       }
     });
-  }
-
-
-
-  register() {
-
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      // this.showOtpComponent = true;
-      // this.toastr.success("Thank you for registering with us!");
-      // this.router.navigate(['/login']);
-
-      // let params = {
-      //     ...this.registerForm.value, 
-      //     phoneNo : this.phoneNo.phoneNoNumber,
-      //     country_code : this.phoneNo.selectedCountry.dialCode
-      // }
-      // this.authService.registerUser(params)
-      //     .pipe(takeUntil(this._unsubscribeAll))
-      //     .subscribe((res) => {
-      //         if (!res.isSucceed) {
-      //             this.toastr.error(res.msg)
-      //             return;
-      //         }
-      //         this.toastr.success("Thank you for registering with us!");
-      //         this.router.navigate(['/auth/login']);
-      //     }, (error) => { console.log(error) });
-    }
   }
 
 }

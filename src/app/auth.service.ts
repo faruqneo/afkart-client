@@ -21,7 +21,19 @@ export class AuthService {
   }
 
   loginUser(login: Login): Observable<Login> {
-    return this.http.post<Login>(`${baseUrl}/user/login`, login);
+    return this.http.post<Login>(`${baseUrl}/user/login`, login)
+      .pipe(tap(data => {
+        console.log(data);
+        localStorage.setItem('accessToken', data.accessToken)
+      }));
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem('accessToken') !== null
+  }
+
+  logout() {
+    localStorage.removeItem('accessToken')
   }
 
   OTPSend(otp: OTPData): Observable<OTPData> {
