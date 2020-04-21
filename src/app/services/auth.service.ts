@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Register } from './register/register';
-import { Login } from './login/login';
-import { OTPData } from './otp-dialog/otp';
+import { Register } from '../register/register';
+import { Login } from '../login/login';
+import { OTPData } from '../otp-dialog/otp';
 
 const { baseUrl, OTPUrl } = environment;
 

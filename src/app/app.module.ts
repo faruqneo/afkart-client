@@ -7,14 +7,15 @@ import { NgOtpInputModule } from 'ng-otp-input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material-module';
+import { MetarialModule } from './metarial.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { OtpDialogComponent } from './otp-dialog/otp-dialog.component';
-import { MetarialModule } from './metarial.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductComponent } from './product/product.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     OtpDialogComponent,
+    ProductComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -30,14 +33,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    MetarialModule,
     ToastrModule.forRoot(),
     NgxMatIntlTelInputModule,
     NgOtpInputModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MetarialModule,
     HttpClientModule
   ],
   providers: [],

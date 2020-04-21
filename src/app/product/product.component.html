@@ -1,0 +1,131 @@
+<button mat-fab (click)="addToggle()" class="add" matTooltip="add Product">
+    <mat-icon>add</mat-icon>
+</button>
+
+<!-- product from -->
+
+<div class="product-from" *ngIf="addButton">
+    <br>
+    <form name="productFrom" [formGroup]="productFrom" novalidate>
+        <mat-grid-list cols="2" rowHeight="8:1">
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Enter Title" formControlName="title" required>
+                    <mat-icon matSuffix>title</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Vendor</mat-label>
+                    <input matInput placeholder="Enter Vendor" formControlName="vendor" required>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="category">
+                        <mat-option value="option">Option</mat-option>
+                        <mat-option value="option">Option</mat-option>
+                        <mat-option value="option">Option</mat-option>
+                        <mat-option value="option">Option</mat-option>
+                        <mat-option value="option">Option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Price</mat-label>
+                    <input matInput type="number" formControlName="price" required>
+                    <span matPrefix>₹&nbsp;</span>
+                    <span matSuffix>.00</span>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="fill" class="field">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="Enter Description" formControlName="description"
+                        required></textarea>
+                    <mat-icon matSuffix>description</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="example-chip-list" class="field">
+                    <mat-label>Tags</mat-label>
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                            (removed)="remove(tag)">
+                            {{tag}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="New tag.." [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)">
+                        <mat-icon matSuffix>local_offer</mat-icon>
+                    </mat-chip-list>
+                </mat-form-field>
+
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="8:1">
+            <mat-grid-tile>
+                <mat-card style="margin-top: 10px; width: 50%;">
+                    <mat-card-content>
+                        <ul>
+                            <li *ngFor="let file of files">
+                                <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                                <span id="file-label">
+
+                                </span>
+                            </li>
+                        </ul>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button color="warn" (click)="onClick()">
+                            <mat-icon>file_upload</mat-icon>
+                            Upload
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+                <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*"
+                    style="display:none;" />
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-flat-button class="submit" (click)="productAdd()" type="button">Submit</button>
+                <button mat-flat-button class="reset" type="reset">Reset</button>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<br><br>
+
+<!-- products list -->
+
+<div class="products-list" *ngIf="!addButton">
+    <mat-grid-list cols="4" rowHeight="1:1">
+        <mat-grid-tile>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                            alt="product" style="width: 273px;
+                        height: 286px;">
+                    </div>
+                    <div class="flip-card-back">
+                        <br><br><br><br><br>
+                        <h1>John Doe</h1>
+                        <p>Architect & Engineer
+                            We love that guy</p>
+                    </div>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-tile>5</mat-grid-tile>
+        <mat-grid-tile>6</mat-grid-tile>
+        <mat-grid-tile>7</mat-grid-tile>
+        <mat-grid-tile>8</mat-grid-tile>
+    </mat-grid-list>
+</div>

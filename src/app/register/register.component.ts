@@ -6,7 +6,7 @@ import { confirmPasswordValidator, noWhitespaceValidator } from '../validators/v
 import { takeUntil } from 'rxjs/internal/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({

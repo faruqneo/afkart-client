@@ -6,7 +6,7 @@ import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { OTPData } from './otp';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-otp-dialog',
