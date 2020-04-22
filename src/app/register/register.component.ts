@@ -56,19 +56,16 @@ export class RegisterComponent implements OnInit {
       console.log(result);
 
       if (result.msg === "success") {
-        this.authService.createUser(this.registerForm.value);
-        this.toastr.success("Thank you for registering with us!");
-        this.router.navigate(['/login']);
-        // this.authService.registerUser(params)
-        //     .pipe(takeUntil(this._unsubscribeAll))
-        //     .subscribe((res) => {
-        //         if (!res.isSucceed) {
-        //             this.toastr.error(res.msg)
-        //             return;
-        //         }
-        //         this.toastr.success("Thank you for registering with us!");
-        //         this.router.navigate(['/auth/login']);
-        //     }, (error) => { console.log(error) });
+        this.authService.createUser(this.registerForm.value)
+        .subscribe(
+          data => {
+            this.toastr.success("ThankYou for registering with us")
+            this.router.navigate(['/login']);
+          },
+          error => {
+            console.log(error);
+          }
+        )
       }
     });
   }

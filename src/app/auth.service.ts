@@ -1,30 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Register } from './register/register';
-import { Login } from './login/login';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+import {User} from './model/user';
+// import { Register } from './register/register';
+// import {  } from './login/login';
 import { OTPData } from './otp-dialog/otp';
 
 const { baseUrl, OTPUrl } = environment;
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) { }
-
-  createUser(resiter: Register): Observable<Register> {
-    return this.http.post<Register>(`${baseUrl}/user/registration`, resiter);
+  constructor(private http: HttpClient) { 
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('accessToken')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  loginUser(login: Login): Observable<Login> {
-    return this.http.post<Login>(`${baseUrl}/user/login`, login)
-      .pipe(tap(data => {
+  public get currentUserVal(): User {
+    return this.currentUserSubject.value;
+}
+
+  createUser(user: User) {
+    return this.http.post(`${baseUrl}/user/registration`, user, httpOptions);
+  }
+
+  loginUser(email: string, password: string) {
+    return this.http.post<any>(`${baseUrl}/user/login`, {email: email, password: password})
+      .pipe(map(data => {
         console.log(data);
-        localStorage.setItem('accessToken', data.accessToken)
+          localStorage.setItem('accessToken', data.accessToken);
+          this.currentUserSubject.next(data);
       }));
   }
 
@@ -34,6 +51,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('accessToken')
+    this.currentUserSubject.next(null);
   }
 
   OTPSend(otp: OTPData): Observable<OTPData> {
