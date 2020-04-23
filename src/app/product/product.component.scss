@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette|Lobster|Special+Elite&display=swap');
 
 .add {
-    margin-left: 972px;
+    margin-left: 1093px;
 }
 
 .submit {
@@ -11,8 +11,8 @@
 
 .flip-card {
     background-color: transparent;
-    width: 300px;
-    height: 300px;
+    width: 402px;
+    height: 289px;
     perspective: 1000px;
   }
   
@@ -41,10 +41,12 @@
   .flip-card-front {
     background-color: #bbb;
     color: black;
+    // border: solid;
   }
   
   .flip-card-back {
-    background-image: url('https://images.pexels.com/photos/630754/autumn-orange-nature-red-630754.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    // background-image: url('https://images.pexels.com/photos/630754/autumn-orange-nature-red-630754.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-color: white;
     color: black;
     transform: rotateY(180deg);
     font-family: 'Special Elite', cursive;
@@ -61,3 +63,7 @@
     align-items: center;
     margin-right: 20px;
  }
+
+.filter {
+  
+}
