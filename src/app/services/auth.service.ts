@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Register } from '../register/register';
-import { Login } from '../login/login';
-import { OTPData } from '../otp-dialog/otp';
+import { Login } from '../model/login';
+import { OTPData } from '../model/otp';
 
 const { baseUrl, OTPUrl } = environment;
 

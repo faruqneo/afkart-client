@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { OTPData } from './otp';
+import { OTPData } from '../model/otp';
 import { AuthService } from '../services/auth.service';
 
 @Component({
