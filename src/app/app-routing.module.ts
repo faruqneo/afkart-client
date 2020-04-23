@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'product', component: ProductComponent },
-  { path: 'category', component: CategoryComponent }
-  // { path: '**', redirectTo: 'login' }
+  { path: 'category', component: CategoryComponent },
+  // { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
