@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { confirmPasswordValidator, noWhitespaceValidator } from '../validators/validators';
+import { confirmPasswordValidator, noWhitespaceValidator } from '../../validators/validators';
 import { takeUntil } from 'rxjs/internal/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 
 
 @Component({

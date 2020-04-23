@@ -6,7 +6,7 @@ import { tap, map } from 'rxjs/operators';
 import {User} from './model/user';
 // import { Register } from './register/register';
 // import {  } from './login/login';
-import { OTPData } from './otp-dialog/otp';
+import { OTPData } from './auth/otp-dialog/otp';
 
 const { baseUrl, OTPUrl } = environment;
 
@@ -20,17 +20,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  // private currentUserSubject: BehaviorSubject<User>;
+  // public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) { 
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('accessToken')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('accessToken')));
+    // this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserVal(): User {
-    return this.currentUserSubject.value;
-}
+//   public get currentUserVal(): User {
+//     return this.currentUserSubject.value;
+// }
 
   createUser(user: User) {
     return this.http.post(`${baseUrl}/user/registration`, user, httpOptions);
@@ -41,7 +41,7 @@ export class AuthService {
       .pipe(map(data => {
         console.log(data);
           localStorage.setItem('accessToken', data.accessToken);
-          this.currentUserSubject.next(data);
+          // this.currentUserSubject.next(data);
       }));
   }
 
@@ -51,7 +51,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('accessToken')
-    this.currentUserSubject.next(null);
+    // this.currentUserSubject.next(null);
   }
 
   OTPSend(otp: OTPData): Observable<OTPData> {
