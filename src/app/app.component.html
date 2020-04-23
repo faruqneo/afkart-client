@@ -14,16 +14,12 @@
         <div class="list">
             <span [routerLink]="'/'">HOME</span>
             <span [matMenuTriggerFor]="shop">SHOP</span>
-            <span [matMenuTriggerFor]="product">PRODUCTS</span>
+            <span [routerLink]="'/product'">PRODUCTS</span>
             <span [matMenuTriggerFor]="page">PAGE</span>
             <span [matMenuTriggerFor]="blog">BLOG</span>
             <span [matMenuTriggerFor]="buy">BUY</span>
         </div>
         <mat-menu #shop="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-        </mat-menu>
-        <mat-menu #product="matMenu">
             <button mat-menu-item>Item 1</button>
             <button mat-menu-item>Item 2</button>
         </mat-menu>
@@ -43,7 +39,7 @@
     <mat-grid-tile class="icon">
         <mat-icon matTooltip="search">search</mat-icon>
         <mat-icon matTooltip="compare">compare_arrows</mat-icon>
-        <mat-icon matTooltip="kart">card_travel</mat-icon>
+        <mat-icon matTooltip="cart">card_travel</mat-icon>
     </mat-grid-tile>
 </mat-grid-list>
 
@@ -52,6 +48,7 @@
     <router-outlet></router-outlet>
 </div>
 
+<br>
 <mat-toolbar class="footer">
     <mat-toolbar-row>
         <span>Copyright &copy; 2020</span>

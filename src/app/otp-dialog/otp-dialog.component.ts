@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, ViewChild, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subscription, from } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { OTPData } from './otp';
-import { AuthService } from '../auth.service';
+import { OTPData } from '../model/otp';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-otp-dialog',
@@ -19,7 +20,6 @@ export class OtpDialogComponent implements OnInit {
   countDown;
   count;
 
-  phoneNo: any;
   showProceedBut = false;
   show = true
   @ViewChild('ngOtpInput') ngOtpInput: any;
@@ -28,7 +28,7 @@ export class OtpDialogComponent implements OnInit {
     length: 4,
     isPasswordInput: false,
     disableAutoFocus: false,
-    placeholder:'',
+    placeholder: '',
     inputStyles: {
       'width': '50px',
       'height': '50px'
@@ -53,7 +53,7 @@ export class OtpDialogComponent implements OnInit {
     this.showProceedBut = true;
     this.show = false;
   }
-  
+
   setVal(val) {
     this.ngOtpInput.setValue(val);
   }
@@ -70,8 +70,7 @@ export class OtpDialogComponent implements OnInit {
   }
 
   onProceed(): void {
-    this.authService.OTPVerify(this.data).subscribe(data => console.log(data))
-    this.dialogRef.close();
+    this.authService.OTPVerify(this.data).subscribe(data => this.dialogRef.close(data))
   }
 
   myTimer() {
