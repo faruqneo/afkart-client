@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material-module'
 import { NgxMatIntlTelInputModule  } from "ngx-mat-intl-tel-input";
 import { AuthComponents, AuthRoutingModule } from './auth-routing.module';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { AuthComponents, AuthRoutingModule } from './auth-routing.module';
         ReactiveFormsModule,
         AuthRoutingModule,
         MaterialModule,
-        NgxMatIntlTelInputModule
+        NgxMatIntlTelInputModule,
+        NgOtpInputModule
     ]
 })
 export class AuthModule {}
