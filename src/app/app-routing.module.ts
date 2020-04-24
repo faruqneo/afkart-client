@@ -1,23 +1,45 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/category.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'product', component: ProductComponent },
   { path: 'category', component: CategoryComponent },
-  // { path: '**', redirectTo: '' }
+  // { path: '', component: HomeComponent },
+  {
+    path: '',
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        pathMatch: 'full'
+      },
+      {
+        path: '',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+        data: {
+          meta: {
+            title: 'Authorize YourSelf',
+            description: 'AF Kart'
+          }
+        }
+      }
+    ]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    useHash: false,
+    scrollPositionRestoration: 'enabled',
+    onSameUrlNavigation: 'reload'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -5,8 +5,8 @@ import { tap } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { OTPData } from '../model/otp';
-import { AuthService } from '../services/auth.service';
+import { OTPData } from '../../model/otp';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-otp-dialog',

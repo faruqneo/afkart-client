@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -28,21 +31,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(): void {
+  login() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      this.toastrService.success('login Success');
-      // this.authService.login(this.loginForm.value)
-      //   .pipe(takeUntil(this._unsubscribeAll))
-      //   .subscribe((res) => {
-      //     if (!res.isSucceed) {
-      //       this.toastrService.error(res.msg);
-      //       return;
-      //     }
-          
-      //     this.router.navigate(['']);
-      //   }, (error) => { console.log(error) });
+      this.authService.loginUser(this.details.email.value, this.details.password.value)
+        // .pipe(takeUntil(this._unsubscribeAll))
+        .pipe(first())
+        .subscribe(
+          res => {
+          this.toastrService.success('login Success');
+          this.router.navigate(['']);
+        }, (error) => { console.log(error) });
     }
+  }
+
+  get details(){
+    return this.loginForm.controls;
   }
 
 }

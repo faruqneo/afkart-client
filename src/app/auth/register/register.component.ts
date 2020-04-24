@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { confirmPasswordValidator, noWhitespaceValidator } from '../validators/validators';
+import { confirmPasswordValidator, noWhitespaceValidator } from '../../validators/validators';
 import { takeUntil } from 'rxjs/internal/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -56,19 +56,16 @@ export class RegisterComponent implements OnInit {
       console.log(result);
 
       if (result.msg === "success") {
-        this.authService.createUser(this.registerForm.value);
-        this.toastr.success("Thank you for registering with us!");
-        this.router.navigate(['/login']);
-        // this.authService.registerUser(params)
-        //     .pipe(takeUntil(this._unsubscribeAll))
-        //     .subscribe((res) => {
-        //         if (!res.isSucceed) {
-        //             this.toastr.error(res.msg)
-        //             return;
-        //         }
-        //         this.toastr.success("Thank you for registering with us!");
-        //         this.router.navigate(['/auth/login']);
-        //     }, (error) => { console.log(error) });
+        this.authService.createUser(this.registerForm.value)
+        .subscribe(
+          data => {
+            this.toastr.success("ThankYou for registering with us")
+            this.router.navigate(['/login']);
+          },
+          error => {
+            console.log(error);
+          }
+        )
       }
     });
   }
