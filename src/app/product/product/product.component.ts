@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { noWhitespaceValidator } from '../validators/validators';
+import { noWhitespaceValidator } from '../../validators/validators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Product } from '../model/product';
-import { ProductService } from '../services/product.service';
+import { Product } from '../../model/product';
+import { ProductService } from '../../services/product.service';
 import { map, catchError } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
