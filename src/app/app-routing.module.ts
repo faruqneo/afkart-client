@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product.component';
-import { CategoryComponent } from './category/category.component';
+import { ProductComponent } from './product/product/product.component';
 import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: 'product', component: ProductComponent },
-  { path: 'category', component: CategoryComponent },
+  // { path: 'product', component: ProductComponent },
   // { path: '', component: HomeComponent },
   {
     path: '',
@@ -28,7 +26,18 @@ const routes: Routes = [
             description: 'AF Kart'
           }
         }
-      }
+      },
+      {
+        path: 'product',
+        // canActivate: [AuthGuard],
+        loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
+        data: {
+          meta: {
+            title: 'Product Details',
+            description: 'AF Kart'
+          }
+        }
+      },
     ]
   },
   { path: '**', redirectTo: '' }
