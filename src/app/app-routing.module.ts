@@ -5,14 +5,14 @@ import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  // { path: '', component: HomeComponent },
   {
     path: '',
     children: [
       {
         path: '',
         component: HomeComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         pathMatch: 'full'
       },
       {
