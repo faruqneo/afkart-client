@@ -8,6 +8,8 @@ import { ProductService } from '../../services/product.service';
 import { map, catchError } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +17,8 @@ import { of } from 'rxjs';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+
+  categories: any = [];
 
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
 
@@ -28,16 +32,22 @@ export class ProductComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor(private fromBulider: FormBuilder, private productService: ProductService) { }
+  constructor(
+    private fromBulider: FormBuilder,
+    private productService: ProductService,
+    private toastr: ToastrService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.productFrom = this.fromBulider.group({
       title: ['', [Validators.required, noWhitespaceValidator]],
       vendor: ['', [Validators.required, noWhitespaceValidator]],
       category: ['', [Validators.required, noWhitespaceValidator]],
-      price: ['', [Validators.required, noWhitespaceValidator]],
+      price: ['', [Validators.required]],
       description: ['', [Validators.required, noWhitespaceValidator]]
     })
+    this.getCategory();
   }
 
   addToggle(): void {
@@ -86,7 +96,7 @@ export class ProductComponent implements OnInit {
         return of(`${file.data.name} upload failed.`);
       })).subscribe((event: any) => {
         if (typeof (event) === 'object') {
-          console.log(event.body);
+          console.log('event.body',event.body.link);
         }
       });
   }
@@ -109,10 +119,24 @@ export class ProductComponent implements OnInit {
     fileUpload.click();
   }
 
-  productAdd() {
-    const data: Product = { ...this.productFrom.value, tags: this.tags, files: this.files }
-    console.log(data)
+  getCategory() {
+    this.productService.getCategory().subscribe((res) => this.categories = res);
+    console.log('category',this.categories);
   }
 
+  // addNewitemcategory = (term) => ({ id: term, category: term });
+  // [addTag]="addNewitemdistrict"
 
+  productAdd() {
+    const data: Product = { ...this.productFrom.value, tags: this.tags, files: this.files }
+    console.log(data);
+    this.productService.addProduct(data)
+    .subscribe((res) => {
+      console.log(res);
+      this.toastr.success('Your Product Added Successfully');
+      this.router.navigate(['product'])
+    })
+  }
+
+// 
 }

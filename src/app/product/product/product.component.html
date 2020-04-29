@@ -25,13 +25,23 @@
                 <mat-form-field appearance="fill" class="field">
                     <mat-label>Category</mat-label>
                     <mat-select formControlName="category">
-                        <mat-option value="option">Option</mat-option>
-                        <mat-option value="option">Option</mat-option>
-                        <mat-option value="option">Option</mat-option>
-                        <mat-option value="option">Option</mat-option>
-                        <mat-option value="option">Option</mat-option>
+                        <mat-option *ngFor="let category of categories" [value]="category._id">
+                            {{category.title}}
+                          </mat-option>
+                          <!-- <mat-option>Add New</mat-option> -->
                     </mat-select>
                 </mat-form-field>
+                <!-- <div class="col-2">
+                    <ng-select
+                      class="custom-select"
+                      [items]="categories"
+                      bindLabel="category.title"
+                      placeholder="category"
+                      bindValue="category._id"
+                      [addTag]="addNewitemcategory"
+                      formControlName="category">
+                    </ng-select>
+                  </div> -->
 
                 <mat-form-field appearance="fill" class="field">
                     <mat-label>Price</mat-label>
