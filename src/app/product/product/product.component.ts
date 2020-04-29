@@ -25,7 +25,8 @@ export class ProductComponent implements OnInit {
   addButton: boolean = false;
   productFrom: FormGroup;
   tags: Array<string> = [];
-  files: Array<any> = []
+  files: Array<{ data: object, inProgress: boolean, progress: number }> = [];
+  images: Array<string> = [];
   visible = true;
   selectable = true;
   removable = true;
@@ -37,7 +38,7 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private toastr: ToastrService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.productFrom = this.fromBulider.group({
@@ -96,7 +97,8 @@ export class ProductComponent implements OnInit {
         return of(`${file.data.name} upload failed.`);
       })).subscribe((event: any) => {
         if (typeof (event) === 'object') {
-          console.log('event.body',event.body.link);
+          console.log('event.body', event.body.link);
+          this.images.push(event.body.link)
         }
       });
   }
@@ -105,15 +107,16 @@ export class ProductComponent implements OnInit {
     this.fileUpload.nativeElement.value = '';
     this.files.forEach(file => {
       this.uploadFile(file);
+      console.log("file upload fun returns ");
+      console.log(this.uploadFile(file))
     });
   }
 
   onClick() {
-    const fileUpload = this.fileUpload.nativeElement; fileUpload.onchange = () => {
-      for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
-        this.files.push({ data: file, inProgress: false, progress: 0 });
-      }
+    const fileUpload = this.fileUpload.nativeElement;
+    fileUpload.onchange = () => {
+      for (let index = 0; index < fileUpload.files.length; index++)
+        this.files.push({ data: fileUpload.files[index], inProgress: false, progress: 0 });
       this.uploadFiles();
     };
     fileUpload.click();
@@ -121,15 +124,18 @@ export class ProductComponent implements OnInit {
 
   getCategory() {
     this.productService.getCategory().subscribe((res) => this.categories = res);
-    console.log('category',this.categories);
+    console.log('category', this.categories);
   }
 
   // addNewitemcategory = (term) => ({ id: term, category: term });
   // [addTag]="addNewitemdistrict"
 
   productAdd() {
-    const data: Product = { ...this.productFrom.value, tags: this.tags, files: this.files }
+    const data: Product = { ...this.productFrom.value, tags: this.tags, files: this.images }
+    console.log("---------------------")
     console.log(data);
+    console.log("---------------------")
+
     this.productService.addProduct(data)
     .subscribe((res) => {
       console.log(res);
@@ -138,5 +144,5 @@ export class ProductComponent implements OnInit {
     })
   }
 
-// 
+  // 
 }
