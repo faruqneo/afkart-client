@@ -34,6 +34,10 @@ export class ProductService {
     return this.http.post<any>(`${environment.baseUrl}/product`, data, httpOptions);
   }
 
+  getProduct() {
+    return this.http.get(this.baseUrl + `/product`);
+  }
+
   
 
 }

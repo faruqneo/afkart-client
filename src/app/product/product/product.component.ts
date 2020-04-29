@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 export class ProductComponent implements OnInit {
 
   categories: any = [];
+  products: any = [];
 
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
 
@@ -49,6 +50,7 @@ export class ProductComponent implements OnInit {
       description: ['', [Validators.required, noWhitespaceValidator]]
     })
     this.getCategory();
+    this.getProduct();
   }
 
   addToggle(): void {
@@ -142,6 +144,11 @@ export class ProductComponent implements OnInit {
       this.toastr.success('Your Product Added Successfully');
       this.router.navigate(['product'])
     })
+  }
+
+  getProduct() {
+    this.productService.getProduct().subscribe((res) => this.products = res);
+    console.log('products',this.products);
   }
 
   // 
