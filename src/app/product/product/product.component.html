@@ -27,8 +27,8 @@
                     <mat-select formControlName="category">
                         <mat-option *ngFor="let category of categories" [value]="category._id">
                             {{category.title}}
-                          </mat-option>
-                          <!-- <mat-option>Add New</mat-option> -->
+                        </mat-option>
+                        <!-- <mat-option>Add New</mat-option> -->
                     </mat-select>
                 </mat-form-field>
                 <!-- <div class="col-2">
@@ -113,90 +113,35 @@
     <br>
     <mat-drawer-container>
         <mat-drawer mode="side" opened class="filter">
-            
+
         </mat-drawer>
         <mat-drawer-content class="products-list">
             <mat-grid-list cols="2" rowHeight="400px">
-                <mat-grid-tile>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                    alt="product" style="width: 402px;height: 296px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <br><br><br>
-                                <h1>Pink top</h1>
-                                <p>dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv</p>
-                                <br>
-                                <button mat-raised-button color="primary"><mat-icon>shopping_cart</mat-icon> Buy now</button>&nbsp;
-                                <button mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                    alt="product" style="width: 402px;height: 296px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <br><br><br>
-                                <h1>Fab jens</h1>
-                                <p>dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv</p>
-                                <br>
-                                <button mat-raised-button color="primary"><mat-icon>shopping_cart</mat-icon> Buy now</button>&nbsp;
-                                <button mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
+                <div *ngIf="!loading">
+                    <mat-grid-tile *ngFor="let item of products">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img [src]="item.files[0]" alt="product" style="width: 402px;height: 296px;">
+                                </div>
+                                <div class="flip-card-back">
+                                    <br><br><br>
+                                    <h1>{{item.title}}</h1>
+                                    <p>Vendor: {{item.vendor}}</p>
+                                    <p>Price: ₹{{item.price}}</p>
+                                    <p>{{item.description}}</p>
+                                    <br>
+                                    <button mat-raised-button color="primary">
+                                        <mat-icon>visibility</mat-icon> Detail view
+                                    </button>&nbsp;
+                                    <button mat-raised-button color="primary">
+                                        <mat-icon>add_shopping_cart</mat-icon> Add to cart
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                    alt="product" style="width: 402px;height: 296px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <br><br><br>
-                                <h1>Fab jens</h1>
-                                <p>dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv</p>
-                                <br>
-                                <button mat-raised-button color="primary"><mat-icon>shopping_cart</mat-icon> Buy now</button>&nbsp;
-                                <button mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                                    alt="product" style="width: 402px;height: 296px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <br><br><br>
-                                <h1>Fab jens</h1>
-                                <p>dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv
-                                dkvmdvm kdmvdkmvdm dkv</p>
-                                <br>
-                                <button mat-raised-button color="primary"><mat-icon>shopping_cart</mat-icon> Buy now</button>&nbsp;
-                                <button mat-raised-button color="primary"><mat-icon>add_shopping_cart</mat-icon> Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </mat-grid-tile>
+                    </mat-grid-tile>
+                </div>
             </mat-grid-list>
             <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
             </mat-paginator>

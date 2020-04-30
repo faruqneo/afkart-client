@@ -7,7 +7,7 @@ import { Product } from '../../model/product';
 import { ProductService } from '../../services/product.service';
 import { map, catchError } from 'rxjs/operators';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class ProductComponent implements OnInit {
 
   categories: any = [];
-  products: any = [];
+  products: Array<Product> = []; 
 
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
 
@@ -32,6 +32,7 @@ export class ProductComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  loading: boolean = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -139,17 +140,19 @@ export class ProductComponent implements OnInit {
     console.log("---------------------")
 
     this.productService.addProduct(data)
-    .subscribe((res) => {
-      console.log(res);
-      this.toastr.success('Your Product Added Successfully');
-      this.router.navigate(['product'])
-    })
+      .subscribe((res) => {
+        console.log(res);
+        this.toastr.success('Your Product Added Successfully');
+        this.router.navigate(['product'])
+      })
   }
 
-  getProduct() {
-    this.productService.getProduct().subscribe((res) => this.products = res);
-    console.log('products',this.products);
+  getProduct(): void{
+    this.productService.getProduct().subscribe(data => {
+      this.products = data;
+      this.loading = false;
+    });
+    console.log('products', this.products);
   }
 
-  // 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Product } from '../model/product';
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -34,8 +35,8 @@ export class ProductService {
     return this.http.post<any>(`${environment.baseUrl}/product`, data, httpOptions);
   }
 
-  getProduct() {
-    return this.http.get(this.baseUrl + `/product`);
+  getProduct(): Observable<Product[]> {
+    return this.http.get<any>(this.baseUrl + `/product`);
   }
 
   
