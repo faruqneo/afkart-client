@@ -37,13 +37,13 @@
 
         <div class="col-lg-6">
           <mat-form-field appearance="outline">
-            <mat-label>phoneNo Number</mat-label>
+            <mat-label>Phone Number</mat-label>
             <ngx-mat-intl-tel-input [preferredCountries]="['in']" [enablePlaceholder]="true"
               name="phoneNo" formControlName="phoneNo" #phoneNo></ngx-mat-intl-tel-input>
             <mat-hint>e.g. {{phoneNo.selectedCountry.placeHolder}}</mat-hint>
 
             <mat-error>
-              phoneNo is required
+              Phone Number is required 
             </mat-error>
           </mat-form-field>
         </div>
